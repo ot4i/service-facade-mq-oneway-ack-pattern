@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<head><!-- 
+
+(C) COPYRIGHT International Business Machines Corp., 2009
+
+All Rights Reserved * Licensed Materials - Property of IBM
+
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="copyright" content="Copyright IBM Corporation 2008"/>
+<meta name="DC.Rights.Owner" content="Copyright IBM Corporation 2008"/>
+<meta name="abstract" content="Use the Service Facade to WebSphere MQ: one-way with acknowledgment pattern to accept requests from many client applications on a single queue, and to return responses to the correct client by using transactional flows and persistent WebSphere MQ messages."/>
+<!-- Licensed Materials Property of IBM -->
+<!-- US Government Users Restricted Rights -->
+<!-- Use, duplication or disclosure restricted by -->
+<!-- GSA ADP Schedule Contract with IBM Corp. -->
+<link rel="stylesheet" type="text/css" href="css/ibmdita.css" />
+	<link rel="stylesheet" type="text/css" href="css/bip4.css" />
+<title>Request flow for the Service Facade to WebSphere MQ: one-way with acknowledgment Pattern</title>
+</head>
+<body id="mbi.mrrc.relmq.overview">
+<div class="section">
+	<h1 class="topictitle1">Request flow for the <span>Service Facade to WebSphere MQ: one-way with acknowledgment</span> pattern</h1>
+	<p class="shortdesc">
+	Details about the Request flow, including logging and exceptions, for the 
+	<span>Service Facade to WebSphere MQ: one-way with acknowledgment</span> pattern.
+	</p>
+	<ol>
+		<li>
+			A SOAP request is received by a SOAP node. If validation is 
+			required by the pattern parameters, the request is validated.
+		</li>
+		<li>
+			The SOAP and HTTP headers are removed to leave the basic XML message targeted 
+			at the provider application.
+		</li>
+		<li>
+			The message then passes to a request processing subflow, which provides a place 
+			for the customization of a pattern instance.
+		</li>
+		<li>
+			Any exception occurring up to this point is caught and causes a SOAP fault to be 
+			returned to the caller. The request is not processed after the fault 
+			has been sent.
+		</li>
+		<li>
+			If no exceptions occur, the message is written as a persistent message to the 
+			input queue of the provider and is committed. The flow is structured so that if the 
+			write is successful, any subsequent exceptions do not cause a response to 
+			the requester that indicates that the message was not sent. However, it is still possible that 
+			the timeout on the SOAP node might cause a SOAP timeout fault to be returned.
+		</li>
+		<li>
+			A positive acknowledgment is returned to the requester as a SOAP Reply. 
+			This response contains a single acknowledgment with the string <tt>Accepted</tt>.
+		</li>
+		<li>
+			If you require logging of requests and the message flow succeeds, the 
+			logging subflow is called to log the incoming message.
+		</li>
+		<li>
+			If an exception occurs after the message is written, when building and 
+			sending the acknowledgment, and if error messages are required by the pattern 
+			parameters, the error subflow is called to record the error and the subflow 
+			ends successfully. Because the message persists on the provider queue 
+			this error is for information only, not for data persistence, and the body of the 
+			message is not included. If error messages are not required by the pattern 
+			parameters, the flow ends successfully.
+		</li>
+	</ol>
+</div>
+<p>
+<a href="overview.htm#anchor1" title="Back">Back to Service Facade to WebSphere MQ: one-way with acknowledgment pattern specification</a>
+</p>
+</body>
+</html>

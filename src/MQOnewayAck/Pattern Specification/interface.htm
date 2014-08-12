@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<head><!-- 
+
+(C) COPYRIGHT International Business Machines Corp., 2009
+
+All Rights Reserved * Licensed Materials - Property of IBM
+
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="copyright" content="Copyright IBM Corporation 2008"/>
+<meta name="DC.Rights.Owner" content="Copyright IBM Corporation 2008"/>
+<meta name="abstract" content="Details about what you need to know, and what resources you must have before you can use the Service Facade to WebSphere MQ: one-way with acknowledgment pattern."/>
+<!-- Licensed Materials Property of IBM -->
+<!-- US Government Users Restricted Rights -->
+<!-- Use, duplication or disclosure restricted by -->
+<!-- GSA ADP Schedule Contract with IBM Corp. -->
+<link rel="stylesheet" type="text/css" href="css/ibmdita.css" />
+	<link rel="stylesheet" type="text/css" href="css/bip4.css" />
+<title>Interface example</title>
+</head>
+<body id="sen.sf.onewayackmq.interface">
+<h1 class="topictitle1">Interface example</h1>
+<div>
+	<p class="shortdesc">
+	The schema for the XML messages that are expected by the provider application are 
+	required as the basis for the request elements in the WSDL file that is used as the 
+	service interface. </p>
+	<p>For example, the provider application might take 
+	messages with an action and those messages contain the item upon which that action must be taken. 
+	The following example contains an action, SaveItem, which becomes the service operation:
+	</p>
+</div>
+<div><pre>
+	&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+	&lt;schema targetNamespace="http://ServiceFacade_RR" elementFormDefault="qualified" 
+	xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ServiceFacade_RR"&gt;
+	&lt;complexType name="Item"&gt;
+	&lt;sequence&gt; 
+	&lt;element name="Name" type="string"&gt;&lt;/element&gt;
+	&lt;element name="Code" type="string"&gt;&lt;/element&gt;
+	&lt;element name="Description" type="string"&gt;&lt;/element&gt;
+	&lt;element name="Location" type="string"&gt;&lt;/element&gt; 
+	&lt;/sequence&gt; 
+	&lt;/complexType&gt; 
+	&lt;element name="SaveItem" type="tns:SaveItem"&gt;&lt;/element&gt; 
+	&lt;complexType name="SaveItem"&gt; 
+	&lt;sequence&gt; 
+	&lt;element name="Item" type="tns:Item"&gt;&lt;/element&gt;
+	&lt;/sequence&gt; 
+	&lt;/complexType&gt; 
+	&lt;/schema&gt;
+	</pre>
+</div>
+<p>
+The associated WSDL must define an input message with an element 
+that corresponds to the top level element that is required by the provider schema. The 
+following fragment corresponds to the preceding provider schema:
+</p>
+<pre>
+	&lt;wsdl:message name="SaveItemRequestMsg"&gt; &lt;wsdl:part name="SaveItemRequest" 
+	element="tns:SaveItem"&gt;&lt;/wsdl:part&gt; &lt;/wsdl:message&gt; </pre>
+
+
+<h2>acknowledgment</h2> 
+The acknowledgment is fixed by the pattern and applies to all pattern instances 
+but name spaces might vary.
+<p>
+The schema for the acknowledgment (with pattern specific name spaces indicated) 
+is:
+</p>
+<div><pre>
+	&lt;?xml version="1.0" encoding="UTF-8"?&gt; 
+	&lt;schema targetNamespace="&lt;instance specific&gt;" 
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tns="http://&lt;instance specific&gt;" "&gt; 
+	&lt;complexType name="Ack"&gt; 
+	&lt;sequence&gt; 
+	&lt;element name="acknowledgment" type="string"&gt;&lt;/element&gt; 
+	&lt;/sequence&gt; 
+	&lt;/complexType&gt; 
+	&lt;element name="Response" type="tns:Ack"&gt;
+	&lt;/element&gt; 
+	&lt;/schema&gt;</pre>
+</div>
+<p>
+The WSDL entry defining the response message must reference the following response:
+</p><pre>
+	&lt;wsdl:message name="SaveItemResponseMsg"&gt; &lt;wsdl:part name="Response" 
+	element="tns:Response"&gt;&lt;/wsdl:part&gt; &lt;/wsdl:message&gt;</pre>
+<p>
+<a href="overview.htm#anchor1" title="Back">Back to Service Facade to WebSphere MQ: one-way with acknowledgment pattern specification</a>
+</p>
+</body>
+</html>

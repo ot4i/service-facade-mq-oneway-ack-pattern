@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<head><!-- 
+
+(C) COPYRIGHT International Business Machines Corp., 2009
+
+All Rights Reserved * Licensed Materials - Property of IBM
+
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="copyright" content="Copyright IBM Corporation 2008"/>
+<meta name="DC.Rights.Owner" content="Copyright IBM Corporation 2008"/>
+<meta name="abstract" content="Use the Service Facade to WebSphere MQ: one-way with acknowledgment pattern to accept requests from many client applications on a single queue, and to return responses to the correct client by using transactional flows and persistent WebSphere MQ messages."/>
+<!-- Licensed Materials Property of IBM -->
+<!-- US Government Users Restricted Rights -->
+<!-- Use, duplication or disclosure restricted by -->
+<!-- GSA ADP Schedule Contract with IBM Corp. -->
+<link rel="stylesheet" type="text/css" href="css/ibmdita.css" />
+	<link rel="stylesheet" type="text/css" href="css/bip4.css" />
+<title>Service Facade to WebSphere MQ: one-way with acknowledgment pattern</title>
+</head>
+<body id="mbi.mrrc.relmq.overview">
+<div class="section">
+	<h1 class="topictitle1">Log subflow for the 
+	<span>Service Facade to WebSphere MQ: one-way with acknowledgment</span> pattern</h1>
+	<p class="shortdesc">
+	If the logging subflow is included in the request flow, the logging of requests 
+	is controlled by the user-defined property:
+	<span class="msobjprop">LoggingOn</span>. 
+	</p>
+	<p>
+	Log messages are written as persistent WebSphere MQ messages to a
+	WebSphere MQ queue. These log messages can then be processed separately in accordance with the 
+	standard practices within your organization. The message log contains the 
+	original message and the following information in an MQRFH2 header:
+	</p>
+	<ul>
+		<li>
+			Time stamp
+		</li>
+		<li>
+			Broker name
+		</li>
+		<li>
+			Message flow name
+		</li>
+	</ul>
+</div>
+<a href="overview.htm#anchor1" title="Back">Back to Service Facade to WebSphere MQ: one-way with acknowledgment pattern specification</a>
+</body>
+</html>

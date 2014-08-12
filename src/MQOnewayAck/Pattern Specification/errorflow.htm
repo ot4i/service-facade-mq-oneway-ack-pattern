@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us">
+<head><!-- 
+
+(C) COPYRIGHT International Business Machines Corp., 2009
+
+All Rights Reserved * Licensed Materials - Property of IBM
+
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="copyright" content="Copyright IBM Corporation 2008"/>
+<meta name="DC.Rights.Owner" content="Copyright IBM Corporation 2008"/>
+<meta name="abstract" content="Use the Service Facade to WebSphere MQ: one-way with acknowledgment pattern to accept service requests and fulfill these by using WebSphere MQ enabled applications."/>
+<!-- Licensed Materials Property of IBM -->
+<!-- US Government Users Restricted Rights -->
+<!-- Use, duplication or disclosure restricted by -->
+<!-- GSA ADP Schedule Contract with IBM Corp. -->
+<link rel="stylesheet" type="text/css" href="css/ibmdita.css" />
+	<link rel="stylesheet" type="text/css" href="css/bip4.css" />
+<title>Error subflow for the Service Facade to WebSphere MQ: one-way with acknowledgment pattern</title>
+</head>
+<body id="sen.sf.onewayackmq.errorflow">
+<div class="section">
+	<h1 class="topictitle1">Error subflow for the <span>Service Facade to WebSphere MQ: one-way with 
+	acknowledgment</span> pattern</h1>
+	<p class="shortdesc">This subflow tests whether an error message must be written, which is determined 
+	by the user-defined property: <span class="msobjprop">ErrorLoggingOn</span>.</p>
+<ol>
+<li>If you have configured the pattern parameters to include error messages and the user-defined property: 
+<span class="msobjprop">ErrorLoggingOn</span> is selected, an error message is prepared and written to the 
+error queue.
+<p>Details of the exception are written as an XML message. These details include:</p>
+	<ul>
+	<li>Broker name</li>
+	<li>Flow name</li>
+	<li>Time stamp</li>
+	<li>Summary of the exception data</li>
+	</ul>
+	<p>The summary of the exception data contains the message flow label, error number, text description, 
+	and a list of inserts giving further details.</p>
+</li>
+<li>If the message to the provider has been written and a reply sent to the requester, no further action 
+is taken.</li> 
+<li>If the message to the provider has not been written, an exception is produced that causes a SOAP fault 
+to be returned to the requester.</li>
+</ol>
+</div>
+<a href="overview.htm#anchor1" title="Back">Back to the Service Facade to WebSphere MQ: one-way with acknowledgment 
+pattern specification</a>
+</body>
+</html>

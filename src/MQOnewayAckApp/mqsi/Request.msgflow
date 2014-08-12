@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmFlowOrder.msgnode="ComIbmFlowOrder.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ComIbmTryCatch.msgnode="ComIbmTryCatch.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:mqsi_Error.subflow="mqsi/Error.subflow"
+    xmlns:mqsi_Log.subflow="mqsi/Log.subflow" xmlns:mqsi_RequestProcessor.subflow="mqsi/RequestProcessor.subflow" xmlns:patternAnnotation="http://www.ibm.com/patternAnnotation/2010" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="mqsi/Request.msgflow"
+    nsPrefix="mqsi_Request.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="Request" bundleName="mqsi/Request" pluginId="MQOnewayAckApp"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/MQOnewayAckApp/icons/full/obj16/Request.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/MQOnewayAckApp/icons/full/obj30/Request.gif"/>
+    <longDescription xmi:type="utility:ConstantString" string="Copyright (c) 2014 IBM Corporation and other Contributors&#xD;&#xA;&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA; &#xD;&#xA;Contributors:&#xD;&#xA;     IBM - initial implementation"/>
+    <composition>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="330,130" computeExpression="esql://routine/mqsi#STRIP.Main">
+        <translation xmi:type="utility:ConstantString" string="Strip to Body"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTryCatch.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="197,188">
+        <translation xmi:type="utility:ConstantString" string="Catch  before Write"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="766,21" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="SOAP Reply"/>
+      </nodes>
+      <nodes xmi:type="ComIbmFlowOrder.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="130,265">
+        <translation xmi:type="utility:ConstantString" string="Log after response"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="582,195" computeExpression="esql://routine/mqsi#Build_SOAP_Reply_Ack.Main">
+        <translation xmi:type="utility:ConstantString" string="Build Acknowledgement"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="81,85" wsdlFileName="AddressBookMessageSet/addressbook/http/com/AddressBook.wsdl" selectedPortType="AddressBookMessageSetPortType" selectedBinding="AddressBookMessageSetSOAP_HTTP_Binding" selectedPort="SOAP_HTTP_Port" useHTTPTransport="true" urlSelector="/AddressBook_HTTP_Service" messageSetProperty="AddressBookMessageSet">
+        <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="497,191" queueManagerName="" queueName="PROVIDER" transactionMode="no" persistenceMode="yes" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="Out to Provider"/>
+      </nodes>
+      <nodes xmi:type="mqsi_RequestProcessor.subflow:FCMComposite_1" xmi:id="FCMComposite_1_17" location="390,190">
+        <translation xmi:type="utility:ConstantString" string="RequestProcessor"/>
+      </nodes>
+      <nodes xmi:type="mqsi_Error.subflow:FCMComposite_1" xmi:id="FCMComposite_1_18" location="310,30">
+        <translation xmi:type="utility:ConstantString" string="Error"/>
+      </nodes>
+      <nodes xmi:type="mqsi_Log.subflow:FCMComposite_1" xmi:id="FCMComposite_1_19" location="426,440">
+        <translation xmi:type="utility:ConstantString" string="Log"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.try" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.first" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_11" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_14" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_17" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="FCMComposite_1_14" sourceNode="FCMComposite_1_17" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_16" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_17" targetNode="FCMComposite_1_19" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.second" targetTerminalName="InTerminal.Input"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+    <patternAnnotations>
+      <AnnotationTarget targetObjects="FCMComposite_1_13">
+        <PatternAnnotation xmi:type="patternAnnotation:PropertyPatternAnnotation" aliasId="FCMComposite_1_13.wsdlFileName" targetObject="FCMComposite_1_13" targetPropertyId="wsdlFileName"/>
+        <PatternAnnotation xmi:type="patternAnnotation:PropertyPatternAnnotation" aliasId="FCMComposite_1_13.validateMaster" targetObject="FCMComposite_1_13" targetPropertyId="validateMaster"/>
+      </AnnotationTarget>
+      <AnnotationTarget targetObjects="FCMComposite_1_14">
+        <PatternAnnotation xmi:type="patternAnnotation:PropertyPatternAnnotation" aliasId="FCMComposite_1_14.queueManagerName" targetObject="FCMComposite_1_14" targetPropertyId="queueManagerName"/>
+        <PatternAnnotation xmi:type="patternAnnotation:PropertyPatternAnnotation" aliasId="FCMComposite_1_14.queueName" targetObject="FCMComposite_1_14" targetPropertyId="queueName"/>
+      </AnnotationTarget>
+    </patternAnnotations>
+  </eClassifiers>
+</ecore:EPackage>
